@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenida · Gestor de Proyectos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-violet-200 via-fuchsia-100 to-teal-100 font-['Quicksand'] p-6">
+
+  <main class="relative w-full max-w-lg bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white/70 shadow-2xl shadow-purple-300/40 px-10 py-14 sm:px-14 sm:py-16 text-center overflow-hidden">
+
+    <!-- burbujas decorativas -->
+    <div class="absolute -top-10 -left-10 w-40 h-40 bg-violet-300/30 rounded-full blur-2xl"></div>
+    <div class="absolute -bottom-12 -right-8 w-44 h-44 bg-teal-300/30 rounded-full blur-2xl"></div>
+    <div class="absolute top-1/2 -right-6 w-20 h-20 bg-rose-300/30 rounded-full blur-xl"></div>
+
+    <div class="relative flex flex-col items-center gap-8">
+
+      <!-- lacito superior -->
+      <div class="flex items-center gap-2 text-fuchsia-400">
+        <span class="w-6 h-px bg-violet-300"></span>
+        <span class="text-lg">🎀</span>
+        <span class="w-6 h-px bg-teal-300"></span>
+      </div>
+
+      <!-- medallon -->
+      <div class="w-20 h-20 rounded-full bg-gradient-to-br from-violet-300 via-fuchsia-200 to-teal-200 flex items-center justify-center shadow-inner shadow-white/60 border border-white/70">
+        <span class="text-3xl">💜</span>
+      </div>
+
+      <!-- titulo -->
+      <div class="space-y-2">
+        <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-fuchsia-400 font-semibold">Bienvenida a</p>
+        <h1 class="font-['Playfair_Display'] italic text-4xl sm:text-5xl font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-400 to-teal-500 bg-clip-text text-transparent">
+          Gestor de Proyectos
+        </h1>
+      </div>
+
+      <!-- separador -->
+      <div class="flex items-center gap-3 text-teal-400">
+        <span class="h-px w-10 bg-gradient-to-r from-transparent via-violet-300 to-transparent"></span>
+        <span>✦</span>
+        <span class="text-rose-400">♡</span>
+        <span>✦</span>
+        <span class="h-px w-10 bg-gradient-to-r from-transparent via-teal-300 to-transparent"></span>
+      </div>
+
+      <!-- mensaje -->
+      <p class="text-gray-600 text-base sm:text-lg leading-relaxed max-w-sm">
+        Tu espacio <span class="text-violet-500 font-semibold">elegante</span>,
+        <span class="text-rose-400 font-semibold">dulce</span> y
+        <span class="text-teal-500 font-semibold">sereno</span> para organizar cada idea con estilo.
+      </p>
+
+      <!-- perlitas inferiores -->
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-violet-300"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-300"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-teal-300"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-rose-300"></span>
+        <span class="w-2 h-2 rounded-full bg-violet-300"></span>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
