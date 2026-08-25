@@ -3,41 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Tarea</title>
+    <title>Crear Tarea · Gestor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* Estilos adicionales para un acabado más refinado */
+        body {
+            background: linear-gradient(145deg, #fdf6f0 0%, #f0e9e4 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 30px 60px -20px rgba(80, 60, 120, 0.12), 0 10px 30px -10px rgba(0, 0, 0, 0.02);
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.25s ease;
+        }
+
+        .form-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -12px rgba(120, 100, 200, 0.10);
+            border-color: rgba(165, 140, 220, 0.2);
+        }
+
+        .icon-wrapper {
+            background: rgba(245, 235, 255, 0.4);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-tierno {
+            transition: all 0.2s ease;
+            border-radius: 9999px;
+            padding: 0.6rem 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .btn-tierno-primary {
+            background: #a78bfa;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.25);
+        }
+
+        .btn-tierno-primary:hover {
+            background: #8b6fe0;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(167, 139, 250, 0.35);
+        }
+
+        .btn-tierno-secondary {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(200, 190, 210, 0.3);
+            color: #4a3f5c;
+        }
+
+        .btn-tierno-secondary:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(160, 140, 200, 0.4);
+            transform: scale(1.02);
+        }
+
+        .campo-label {
+            letter-spacing: 0.04em;
+            font-weight: 600;
+            color: #847a9b;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .input-tierno {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(200, 190, 220, 0.25);
+            border-radius: 12px;
+            padding: 0.65rem 1rem;
+            width: 100%;
+            transition: all 0.2s ease;
+            color: #3d3452;
+            font-size: 0.95rem;
+        }
+
+        .input-tierno:focus {
+            outline: none;
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .input-tierno::placeholder {
+            color: #b5aac4;
+            font-weight: 300;
+        }
+
+        select.input-tierno {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23847a9b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+
+        select.input-tierno option {
+            background: white;
+            color: #3d3452;
+        }
+
+        .footer-link {
+            transition: color 0.2s ease;
+        }
+        .footer-link:hover {
+            color: #a78bfa;
+        }
+
+        .badge-proyecto {
+            background: rgba(167, 139, 250, 0.12);
+            border: 1px solid rgba(167, 139, 250, 0.15);
+            color: #6b5a8a;
+        }
+    </style>
 </head>
-<body>
-    <h1>Agregar tarea a: <span> {{ proyecto.nombre }}</span></h1>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8 antialiased">
 
-    <form method="post">
-        {% csrf_token %}
+    <div class="w-full max-w-2xl glass-card rounded-3xl p-6 md:p-10">
 
-        <div class="space-y-1.5">
-            <label for="titulo">Titulo de la tarea:</label>
-            <input type="text" name="titulo" id="titulo" placeholder="Ej. Diseñar una base de datos" required>
+        <!-- Cabecera con navegación consistente -->
+        <div class="flex items-center gap-3 mb-8 border-b border-white/50 pb-5">
+            <div class="icon-wrapper p-3 rounded-2xl text-indigo-400 shadow-sm">
+                <i class="fa-regular fa-plus text-2xl"></i>
+            </div>
+            <div class="flex-1">
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-700 tracking-tight drop-shadow-sm">
+                    Crear Tarea
+                </h1>
+                <p class="text-sm text-slate-400/80 font-light flex items-center gap-1.5">
+                    <i class="fa-regular fa-heart text-rose-300 text-xs"></i>
+                    Agrega una nueva tarea al proyecto
+                </p>
+            </div>
+
+            <!-- Acciones de cabecera -->
+            <div class="flex items-center gap-2">
+                <a href="{% url 'ver_proyecto' proyecto.id %}"
+                   class="btn-tierno btn-tierno-secondary inline-flex items-center gap-1.5 text-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Volver</span>
+                </a>
+            </div>
         </div>
 
-        <div class="space-y-1.5">
+        <!-- Tarjeta del formulario -->
+        <div class="form-card rounded-2xl p-6 md:p-8">
 
-            <label for="prioridad">Prioridad</label>
-            <select name="prioridad" id="prioridad">
-                {% for valor, etiqueta in prioridad_choices %}
-                    <option value="{{ valor }}" {% if valor == 'MEDIA' %} selected {% endif %} >{{ etiqueta }}
-                    </option>
-                {% endfor %}
-            </select>
+            <!-- Información del proyecto -->
+            <div class="flex items-center gap-3 mb-6 bg-white/40 rounded-xl px-4 py-3 border border-white/40">
+                <div class="icon-wrapper p-2 rounded-lg text-indigo-400">
+                    <i class="fa-regular fa-folder-open"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-slate-400/80 font-medium uppercase tracking-wider">Proyecto</p>
+                    <p class="text-sm font-semibold text-slate-700">{{ proyecto.nombre }}</p>
+                </div>
+                <span class="ml-auto badge-proyecto px-3 py-1 rounded-full text-xs">
+                    <i class="fa-regular fa-hashtag mr-1"></i> ID: {{ proyecto.id }}
+                </span>
+            </div>
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <!-- Campo: Título -->
+                <div class="space-y-1.5">
+                    <label for="titulo" class="campo-label flex items-center gap-2">
+                        <i class="fa-regular fa-pen-to-square text-indigo-300"></i>
+                        Título de la tarea
+                    </label>
+                    <input type="text"
+                           name="titulo"
+                           id="titulo"
+                           placeholder="Ej. Diseñar una base de datos"
+                           required
+                           class="input-tierno">
+                </div>
+
+                <!-- Campo: Prioridad -->
+                <div class="space-y-1.5">
+                    <label for="prioridad" class="campo-label flex items-center gap-2">
+                        <i class="fa-regular fa-flag text-indigo-300"></i>
+                        Prioridad
+                    </label>
+                    <select name="prioridad" id="prioridad" class="input-tierno">
+                        {% for valor, etiqueta in prioridad_choices %}
+                            <option value="{{ valor }}" {% if valor == 'MEDIA' %}selected{% endif %}>
+                                {{ etiqueta }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Campo: Estado -->
+                <div class="space-y-1.5">
+                    <label for="estado" class="campo-label flex items-center gap-2">
+                        <i class="fa-regular fa-circle-check text-indigo-300"></i>
+                        Estado
+                    </label>
+                    <select name="estado" id="estado" class="input-tierno">
+                        {% for valor, etiqueta in estado_choices %}
+                            <option value="{{ valor }}" {% if valor == 'PENDIENTE' %}selected{% endif %}>
+                                {{ etiqueta }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/40">
+                    <button type="submit"
+                            class="btn-tierno btn-tierno-primary inline-flex items-center justify-center gap-2 text-sm w-full sm:w-auto">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Guardar tarea
+                    </button>
+                    <a href="{% url 'ver_proyecto' proyecto.id %}"
+                       class="btn-tierno btn-tierno-secondary inline-flex items-center justify-center gap-2 text-sm w-full sm:w-auto">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancelar
+                    </a>
+                </div>
+            </form>
         </div>
-         <div class="space-y-1.5">
 
-            <label for="estado">Estado</label>
-            <select name="estado" id="estado">
-                {% for valor, etiqueta in estado_choices %}
-                    <option value="{{ valor }}" {% if valor == 'PENDIENTE' %} selected {% endif %} >{{ etiqueta }}
-                    </option>
-                {% endfor %}
-            </select>
+        <!-- Pie con información sutil -->
+        <div class="mt-6 text-xs text-slate-400/70 flex justify-between items-center">
+            <span class="flex items-center gap-1.5 bg-white/30 px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20">
+                <i class="fa-regular fa-circle-check text-emerald-300"></i>
+                Nueva tarea
+            </span>
+            <span class="flex items-center gap-1.5 bg-white/30 px-3 py-1.5 rounded-full backdrop-blur-sm border border-white/20">
+                <i class="fa-solid fa-arrow-left text-indigo-300"></i>
+                <a href="{% url 'proyectos' %}" class="footer-link hover:text-indigo-400 transition-colors">
+                    Ir a la lista de proyectos
+                </a>
+            </span>
         </div>
-        <button type="submit">Guardar</button>
 
-    </form>
+    </div>
+
 </body>
 </html>
