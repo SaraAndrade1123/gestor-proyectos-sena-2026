@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,16 +31,27 @@
 
       <!-- medallon -->
       <div class="w-20 h-20 rounded-full bg-gradient-to-br from-violet-300 via-fuchsia-200 to-teal-200 flex items-center justify-center shadow-inner shadow-white/60 border border-white/70">
-        <span class="text-3xl">💜</span>
+        <span class="text-3xl">
+          <img src="{% static 'img/michi.png' %}" alt="Logo!" class="w-20 h-20 rounded-full">
+        </span>
       </div>
 
       <!-- titulo -->
       <div class="space-y-2">
-        <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-fuchsia-400 font-semibold">Bienvenida a</p>
+        <p class="uppercase tracking-[0.3em] text-xs sm:text-sm text-fuchsia-400 font-semibold">Bienvenid@ a</p>
         <h1 class="font-['Playfair_Display'] italic text-4xl sm:text-5xl font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-400 to-teal-500 bg-clip-text text-transparent">
           Gestor de Proyectos
         </h1>
       </div>
+
+      <!-- Toque final: badge sutil con "v1.0" (solo estética) -->
+    <a href="{% url 'proyectos' %}">
+      <div class="mt-8 inline-flex items-center gap-2 bg-indigo-50/70 px-5 py-2 rounded-full border border-indigo-100/60 text-sm text-indigo-700 font-medium shadow-sm">
+        <i class="fa-regular fa-compass text-indigo-400"></i>
+        <span>Empieza ahora</span>
+        <i class="fa-regular fa-arrow-right text-indigo-400 text-xs"></i>
+      </div>
+    </a>
 
       <!-- separador -->
       <div class="flex items-center gap-3 text-teal-400">

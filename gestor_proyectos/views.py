@@ -7,6 +7,9 @@ from .models import Proyecto, Tarea
 def home(request):
     return render(request, 'home.html')
 
+def acerca_de(request):
+    return render(request, 'acerca-de.html')
+
 def mostrar_proyectos0(request):
     proyectos = Proyecto.objects.all()
 
@@ -51,12 +54,14 @@ def nuevo_proyecto(request):
         nombre = request.POST.get('nombre')
         descripcion = request.POST.get('descripcion')
         duracion = request.POST.get('duracion')
+        imagen = request.FILES.get('imagen')
 
         if nombre and descripcion and duracion:
             proyecto = Proyecto(
                 nombre=nombre,
                 descripcion=descripcion,
                 duracion=int(duracion),
+                imagen = imagen,
             )
 
             proyecto.save()

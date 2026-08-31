@@ -9,6 +9,8 @@ class Proyecto(models.Model):
     descripcion = models.TextField() # Campo de texto largo
     duracion = models.IntegerField() # Campo numérico entero
 
+    imagen = models.ImageField(upload_to='img/', default='img/michi.png')
+
 class Tarea(models.Model):
     '''
     Modelo que representa una tarea de un proyecto
