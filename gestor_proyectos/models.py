@@ -11,6 +11,9 @@ class Proyecto(models.Model):
 
     imagen = models.ImageField(upload_to='img/', default='img/michi.png')
 
+    def __str__(self):
+        return self.nombre
+    
 class Tarea(models.Model):
     '''
     Modelo que representa una tarea de un proyecto
@@ -39,3 +42,6 @@ class Tarea(models.Model):
     titulo= models.CharField(max_length=50)
     prioridad=models.CharField(max_length=5, choices=PRIORIDAD_CHOICES, default='MEDIA')
     estado=models.CharField(max_length=12, choices=ESTADO_CHOICES, default='PENDIENTE')
+
+    def __str__(self):
+            return self.titulo + '(' + self.proyecto.nombre + ')'
