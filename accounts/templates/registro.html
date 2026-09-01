@@ -1,0 +1,233 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro | Moderno</title>
+    <!-- Tailwind CDN + fuente Waze (Inter) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f0f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 1.5rem;
+        }
+        .input-waze {
+            transition: all 0.2s ease;
+            border: 1.5px solid #e2e8f0;
+            background-color: white;
+        }
+        .input-waze:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            outline: none;
+        }
+        .btn-waze {
+            background: #1a73e8;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.2);
+        }
+        .btn-waze:hover {
+            background: #1557b0;
+            box-shadow: 0 6px 14px rgba(26, 115, 232, 0.3);
+            transform: translateY(-1px);
+        }
+        .card-waze {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px -12px rgba(0, 20, 30, 0.15);
+        }
+        .error-text {
+            color: #dc2626;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .error-text::before {
+            content: "⚠️";
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="w-full max-w-lg px-4">
+        <!-- Tarjeta principal -->
+        <div class="card-waze rounded-3xl p-8 md:p-10 shadow-2xl">
+
+            <!-- Cabecera -->
+            <div class="text-center mb-8">
+                <span class="inline-block text-4xl font-semibold tracking-tight text-gray-800">
+                    <img src="{% static 'img/michito.png' %}" alt="Logo!" class="w-20 h-20 rounded-full">
+                </span>
+                <h1 class="text-2xl font-bold text-gray-800 mt-1">Crear cuenta</h1>
+                <p class="text-sm text-gray-500 mt-1 font-medium">Comienza tu experiencia</p>
+            </div>
+
+            <!-- Formulario con todos los campos -->
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+
+                <!-- Usuario -->
+                <div>
+                    <label for="username" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Usuario
+                    </label>
+                    <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        value="{{ form.username.value|default:'' }}"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="ej: maria_garcia"
+                    />
+                    {% if form.username.errors %}
+                        <div class="error-text">{{ form.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Nombre -->
+                <div>
+                    <label for="first_name" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Nombre
+                    </label>
+                    <input
+                        type="text"
+                        name="first_name"
+                        id="first_name"
+                        value="{{ form.first_name.value|default:'' }}"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="María"
+                    />
+                    {% if form.first_name.errors %}
+                        <div class="error-text">{{ form.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Apellido -->
+                <div>
+                    <label for="last_name" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Apellido
+                    </label>
+                    <input
+                        type="text"
+                        name="last_name"
+                        id="last_name"
+                        value="{{ form.last_name.value|default:'' }}"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="García"
+                    />
+                    {% if form.last_name.errors %}
+                        <div class="error-text">{{ form.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Correo electrónico
+                    </label>
+                    <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        value="{{ form.email.value|default:'' }}"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="maria@example.com"
+                    />
+                    {% if form.email.errors %}
+                        <div class="error-text">{{ form.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label for="password1" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        name="password1"
+                        id="password1"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="••••••••"
+                    />
+                    {% if form.password1.errors %}
+                        <div class="error-text">{{ form.password1.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Confirmar contraseña -->
+                <div>
+                    <label for="password2" class="block text-sm font-semibold text-gray-700 mb-1.5">
+                        Confirmar contraseña
+                    </label>
+                    <input
+                        type="password"
+                        name="password2"
+                        id="password2"
+                        required
+                        class="input-waze w-full px-4 py-3.5 rounded-2xl text-gray-800 placeholder:text-gray-400 text-sm transition-shadow"
+                        placeholder="••••••••"
+                    />
+                    {% if form.password2.errors %}
+                        <div class="error-text">{{ form.password2.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Botón -->
+                <div class="pt-2">
+                    <button
+                        type="submit"
+                        class="btn-waze w-full py-3.5 rounded-2xl text-white font-semibold text-base tracking-wide transition-all"
+                    >
+                        Crear cuenta
+                    </button>
+                </div>
+            </form>
+
+            <!-- Enlace a login -->
+            <div class="mt-8 text-center text-sm text-gray-600 border-t border-gray-200/70 pt-6">
+                <p>
+                    ¿Ya tiene una cuenta?
+                    <a href="{% url 'login' %}" class="font-semibold text-[#1a73e8] hover:text-[#1557b0] transition-colors underline decoration-2 underline-offset-2 decoration-blue-200 hover:decoration-blue-400">
+                        Iniciar sesión
+                    </a>
+                </p>
+            </div>
+
+            <!-- detalle Waze -->
+            <div class="mt-5 flex justify-center gap-1 text-gray-300 text-xs">
+                <span>⬤</span><span>⬤</span><span>⬤</span>
+            </div>
+        </div>
+
+        <p class="text-center text-[11px] text-gray-400 mt-6 tracking-wider">
+            ✦ registro seguro ✦
+        </p>
+    </div>
+
+</body>
+</html>

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -58,9 +60,7 @@
                     <div class="flex items-center gap-2.5">
                         <div class="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
                             <!-- Icono Folder (Heroicons) -->
-                            <svg class="icon text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="static/img/michi.png" />
-                            </svg>
+                            <img src="{% static 'img/michi.png' %}" alt="Logo!" class="w-20 h-20 rounded-full">
                         </div>
                         <span class="text-lg font-semibold text-slate-800 tracking-tight hidden sm:block">
                             Gestor de Proyectos

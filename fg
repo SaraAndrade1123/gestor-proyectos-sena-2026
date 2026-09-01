@@ -1,0 +1,15 @@
+[1mdiff --git a/accounts/views.py b/accounts/views.py[m
+[1mindex f4f7043..2a92c24 100644[m
+[1m--- a/accounts/views.py[m
+[1m+++ b/accounts/views.py[m
+[36m@@ -3,3 +3,10 @@[m [mfrom django.contrib.auth.forms import UserCreationForm[m
+ from django.contrib.auth import login[m
+ [m
+ # Create your views here.[m
+[32m+[m[32mdef registro(request):[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        pass[m
+[32m+[m[32m        # guardar user[m
+[32m+[m[32m    else:[m
+[32m+[m[32m        form = UserCreationForm()[m
+[32m+[m[32m    return render(request, 'registro.html', {'form': form})[m
