@@ -6,4 +6,9 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registro/', views.registro, name='registro'),
+    path('grupos/', views.grupos, name='grupos'),
+    path('grupos/<int:id_grupo>/eliminar/', views.eliminar_grupo, name='eliminar_grupo'),
+
+    path('grupos/<int:id_grupo>/editar/', views.editar_grupo, name='editar_grupo'),
+
 ]

@@ -13,7 +13,11 @@ class Proyecto(models.Model):
 
     def __str__(self):
         return self.nombre
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 5137fd2 (Actualización)
 class Tarea(models.Model):
     '''
     Modelo que representa una tarea de un proyecto
@@ -44,4 +48,8 @@ class Tarea(models.Model):
     estado=models.CharField(max_length=12, choices=ESTADO_CHOICES, default='PENDIENTE')
 
     def __str__(self):
+<<<<<<< HEAD
             return self.titulo + '(' + self.proyecto.nombre + ')'
+=======
+        return self.titulo + " ("+ self.proyecto.nombre + ")"
+>>>>>>> 5137fd2 (Actualización)
